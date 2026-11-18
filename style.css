@@ -9,23 +9,11 @@
 
 
     body {
-    margin: 0;
-    padding: 0;
-
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url("images/hotel.jpg.jpeg");
-
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-}
-    background: #fff;
-    color: #333;
+        margin: 0;
+        padding: 0;
+        background: #f4f1eb;
+        color: #2d2a26;
+    }
 
 
 header {
@@ -34,14 +22,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #171717;
+    background: rgba(24, 28, 31, 0.96);
+    border-bottom: 1px solid rgba(209, 172, 105, 0.25);
+    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
 .logo {
-    color: #60d66c;
+    color: #d4b16a;
     font-size: 25px;
     font-weight: 700;
 }
@@ -59,23 +49,26 @@ nav a {
 }
 
 nav a:hover {
-    color: #60d66a;
+    color: #d4b16a;
 }
 
 .nav-btn, .main-btn {
     display: inline-block;
-    background: #69c455;
+    background: linear-gradient(135deg, #b98a45, #d6b36a);
     color: white;
     padding: 12px 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 999px;
     text-decoration: none;
     cursor: pointer;
-    transition: .3s;
+    transition: .3s ease;
+    box-shadow: 0 8px 22px rgba(185, 138, 69, 0.22);
 }
 
 .nav-btn:hover, .main-btn:hover {
-    background: #39984c;
+    background: linear-gradient(135deg, #d6b36a, #a97938);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(185, 138, 69, 0.32);
 }
 
 .menu-btn {
@@ -92,13 +85,28 @@ nav a:hover {
 .hero {
     min-height: 90vh;
     background:
-    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    linear-gradient(90deg, rgba(16,24,29,.88), rgba(16,24,29,.38)),
     url("images/Lawn.jpg.png") center/cover no-repeat;
 
     display: flex;
     align-items: center;
     padding: 8%;
     color: white;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 75% 50%, transparent 0, rgba(16,24,29,.15) 60%, rgba(16,24,29,.42) 100%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    animation: heroRise .9s ease-out both;
 }
 
 .hero-content {
@@ -126,15 +134,49 @@ nav a:hover {
     line-height: 1.8;
 }
 
+@keyframes heroRise {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-content,
+    .reveal {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
 /* COMMON SECTION */
 
 .section {
     padding: 80px 8%;
+    position: relative;
+    overflow: hidden;
 }
 
 .section h2 {
     text-align: center;
-    color: #a17a3d;
+    color: #9b7438;
     font-size: clamp(28px, 3vw, 36px);
     font-weight: 700;
     line-height: 1.2;
@@ -156,6 +198,7 @@ nav a:hover {
     display: flex;
     align-items: center;
     gap: 50px;
+    background: #f8f5ef;
 }
 
 .about-image, .about-text {
@@ -167,6 +210,13 @@ nav a:hover {
     height: 400px;
     object-fit: cover;
     border-radius: 8px;
+    box-shadow: 0 18px 45px rgba(36, 44, 47, .16);
+    transition: transform .5s ease, box-shadow .5s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.015);
+    box-shadow: 0 22px 55px rgba(36, 44, 47, .22);
 }
 
 .about-text h2 {
@@ -175,7 +225,7 @@ nav a:hover {
 
 .about-intro {
     margin: 20px 0;
-    color: #c2185b;
+    color: #24383d;
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(24px, 2.5vw, 30px);
     font-weight: 700;
@@ -183,7 +233,7 @@ nav a:hover {
 }
 
 .about-text .about-description {
-    color: #ad1457;
+    color: #5f5a52;
     font-size: 16px;
     font-weight: 500;
     line-height: 1.9;
@@ -198,15 +248,13 @@ nav a:hover {
 /* FACILITIES */
 
 .facilities {
- 
-    background:
-        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-        url("");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: #20343a;
     color: white;
+}
+
+.facilities h2,
+.facilities .subtitle {
+    color: #ead18e;
 }
 
 
@@ -217,16 +265,17 @@ nav a:hover {
 }
 
 .facility-card {
-    background: white;
-    border-radius: 8px;
+    background: #fbfaf7;
+    border-radius: 12px;
     overflow: hidden;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    transition: .3s;
+    transition: .35s ease;
 }
 
 .facility-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    box-shadow: 0 18px 35px rgba(0,0,0,.22);
 }
 
 .facility-card img {
@@ -254,12 +303,12 @@ nav a:hover {
 /* GALLERY */
 
 .gallery {
-    background: #fff0f5;
+    background: #ebe6dc;
 }
 
 .gallery h2,
 .gallery .subtitle {
-    color: #d63384;
+    color: #9b7438;
 }
 
 .gallery-container {
@@ -277,25 +326,40 @@ nav a:hover {
 }
 
 .gallery-container img:hover {
-    transform: scale(1.03);
+    transform: scale(1.035);
+    filter: saturate(1.08);
 }
 
 /* MANAGER */
 
 .manager {
-    background: #f8f6f1;
+    background: linear-gradient(135deg, #f8f5ef, #ece5d7);
+}
+
+.manager-container {
+    max-width: 1000px;
+    margin: 30px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
 }
 
 .manager-card {
-    max-width: 800px;
-    margin: 30px auto 0;
+    max-width: 100%;
     display: flex;
     align-items: center;
     gap: 35px;
     background: white;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    border-radius: 14px;
+    border: 1px solid rgba(155,116,56,.12);
+    box-shadow: 0 12px 35px rgba(36,44,47,.10);
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.manager-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 42px rgba(36,44,47,.16);
 }
 
 .manager-card img {
@@ -328,12 +392,7 @@ nav a:hover {
 
 
     .booking {
-    background:
-        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-        url("");
-
-    background-size: cover;
-    background-position: center;
+        background: linear-gradient(135deg, #19282d, #29464a);
     color: white;
 }
 
@@ -358,10 +417,18 @@ nav a:hover {
 #bookingForm textarea {
     width: 100%;
     padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
     outline: none;
     font-size: 15px;
+    transition: border-color .25s, box-shadow .25s;
+}
+
+#bookingForm input:focus,
+#bookingForm select:focus,
+#bookingForm textarea:focus {
+    border-color: #d6b36a;
+    box-shadow: 0 0 0 4px rgba(214,179,106,.12);
 }
 
 #bookingForm textarea {
@@ -373,10 +440,11 @@ nav a:hover {
 
 .contact {
     text-align: center;
+    background: #f8f5ef;
 }
 
 .contact h2 {
-    color: #c62828;
+    color: #9b7438;
 }
 
 .contact-details {
@@ -411,7 +479,7 @@ nav a:hover {
 /* FOOTER */
 
 footer {
-    background: #171717;
+    background: #15191b;
     color: white;
     text-align: center;
     padding: 35px 15px;
@@ -455,7 +523,7 @@ footer p {
         top: 65px;
         left: 0;
         width: 100%;
-        background: #171717;
+        background: rgba(24, 28, 31, 0.98);
         flex-direction: column;
         padding: 20px;
     }
@@ -492,6 +560,10 @@ footer p {
     .manager-card {
         flex-direction: column;
         text-align: center;
+    }
+
+    .manager-container {
+        grid-template-columns: 1fr;
     }
 
     .manager-card img {
@@ -549,9 +621,13 @@ footer p {
 }
 
 .logo-icon {
-    color: #e6c477;
-    width: 38px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid #d4b16a;
+    border-radius: 50%;
+    box-shadow: 0 4px 14px rgba(212, 177, 106, 0.25);
     flex: 0 0 auto;
 }
 
